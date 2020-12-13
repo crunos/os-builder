@@ -3,7 +3,7 @@
 ## build os-builder Docker image
 
 ```
-docker build -t crunos/os-builder https://github.com/dengleros/os-builder.git#main
+docker build -t crunos/os-builder https://github.com/crunos/os-builder.git#main
 ```
 
 ## build packages
@@ -71,6 +71,6 @@ docker run --rm -ti \
 	-v $(pwd):$(pwd) \
 	-w $(pwd) \
   	crunos/os-builder:latest \
-	run qemu -disk "disk.img,size=10G,format=qcow2" out/dengleros
+	run qemu -disk "disk.img,size=10G,format=qcow2" crunos
 ```
 
