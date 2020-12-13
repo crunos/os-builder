@@ -1,0 +1,23 @@
+#!/bin/sh
+
+CMD=''
+
+while [ "$1" != "" ]; do
+    case $1 in
+        https://*|*.git)
+            PART=${1##*#}
+            REPO=${1%%#*}
+            BRANCH=${PART%%/*}
+            DIR=${PART#*/}
+	    TDIR=$(mktemp -d)
+            git clone $REPO --branch $BRANCH $TDIR
+	    CMD="$CMD $TDIR/$DIR"
+        ;;
+        *)
+            CMD="$CMD $1"
+        ;;
+    esac
+    shift
+done
+
+exec $CMD
