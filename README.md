@@ -8,6 +8,8 @@ docker build -t crunos/os-builder https://github.com/dengleros/os-builder.git#ma
 
 ## build packages
 
+### local build package
+
 ```
 docker run --rm -ti \
 	-v ~/.docker:/root/.docker \
@@ -16,10 +18,25 @@ docker run --rm -ti \
 	-w $(pwd) \
 	crunos/os-builder:latest \
 	pkg build -disable-content-trust -org crunos --force -hash latest \
-  	<PKG_REPO>[#PKG_REPO_BRANCH]
+  	<SUB-/PATH_IN_PWD>
+```
+
+### remote build package
+
+```
+docker run --rm -ti \
+	-v ~/.docker:/root/.docker \
+	-v /var/run/docker.sock:/var/run/docker.sock \
+	-v $(pwd):$(pwd) \
+	-w $(pwd) \
+	crunos/os-builder:latest \
+	pkg build -disable-content-trust -org crunos --force -hash latest \
+  	<GIT_PKG_REPO>#<PKG_REPO_BRANCH]/[PKG_REPO_SUBDIR]
 ```
 
 ## build os
+
+### local build
 
 ```
 docker run --rm -ti \
@@ -28,7 +45,20 @@ docker run --rm -ti \
 	-v $(pwd):$(pwd) \
 	-w $(pwd) \
   	crunos/os-builder:latest \
-  	build -dir out/ dengleros.yml
+  	build -dir out/ crunos.yml
+```
+
+### remote build
+
+```
+docker run --rm -ti \
+	-v ~/.docker:/root/.docker \
+	-v /var/run/docker.sock:/var/run/docker.sock \
+	-v $(pwd):$(pwd) \
+	-w $(pwd) \
+  	crunos/os-builder:latest \
+  	build \
+	https://github.com/crunos/dist.git#main/crunos.yml
 ```
 
 ## run os (qemu)
