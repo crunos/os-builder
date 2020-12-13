@@ -10,6 +10,7 @@ docker build -t crunos/os-builder https://github.com/dengleros/os-builder.git#ma
 
 ```
 docker run --rm -ti \
+	-v ~/.docker:/root/.docker \
 	-v /var/run/docker.sock:/var/run/docker.sock \
 	-v $(pwd):$(pwd) \
 	-w $(pwd) \
@@ -22,6 +23,7 @@ docker run --rm -ti \
 
 ```
 docker run --rm -ti \
+	-v ~/.docker:/root/.docker \
 	-v /var/run/docker.sock:/var/run/docker.sock \
 	-v $(pwd):$(pwd) \
 	-w $(pwd) \
@@ -33,6 +35,7 @@ docker run --rm -ti \
 
 ```
 docker run --rm -ti \
+	-v ~/.docker:/root/.docker \
   	--device /dev/kvm \
 	-v /var/run/docker.sock:/var/run/docker.sock \
 	-v $(pwd):$(pwd) \
