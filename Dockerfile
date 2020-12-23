@@ -17,6 +17,3 @@ RUN     apk --update --no-cache add \
         qemu-img
         
 COPY    --from=dockerbuild /tmp/docker/docker /usr/bin/
-COPY	files/ /
-
-ENTRYPOINT      [ "/usr/bin/entrypoint", "/usr/bin/linuxkit" ]
